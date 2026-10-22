@@ -32,12 +32,13 @@ abstract class Vehicle {
   // Concrete method
   void displayInfo() {
     // TODO: Display vehicle information
+    print("Vehicle Info: $year $brand $model");
   }
 
   // Add a method to calculate vehicle age (current year - vehicle year)
   int calculateAge() {
     // TODO: Calculate and return vehicle age
-    return 0;
+    return DateTime.now().year - year;
   }
 }
 
@@ -54,16 +55,19 @@ class Car extends Vehicle {
   @override
   void start() {
     // TODO: Implement car start method
+    print("Starting the car engine...");
   }
 
   @override
   void stop() {
     // TODO: Implement car stop method
+    print("Stopping the car engine...");
   }
 
   @override
   void displayInfo() {
     // TODO: Override to show car-specific info as shown in expected output
+    print("Vehicle Info: $year $brand $model ($numberOfDoors doors)");
   }
 }
 
@@ -79,24 +83,42 @@ class Motorcycle extends Vehicle {
   @override
   void start() {
     // TODO: Implement motorcycle start method
+    print("Starting the motorcycle engine...");
   }
 
   @override
   void stop() {
     // TODO: Implement motorcycle stop method
+    print("Stopping the motorcycle engine...");
   }
 
   @override
   void displayInfo() {
     // TODO: Override to show motorcycle-specific info as shown in expected output
+    print("Vehicle Info: $year $brand $model (Has windshield: $hasWindshield)");
   }
 }
 
 void main() {
   // 3. Create a list of vehicles and demonstrate polymorphism by calling start(), stop(), and displayInfo() on each vehicle
   // TODO: Create a list containing one Car and one Motorcycle
+  List<Vehicle> vehicles = [
+    Car("Toyota", "Camry", 2020, 4),
+    Motorcycle("Honda", "CBR", 2021, true),
+  ];
 
   // TODO: Loop through the list and call displayInfo(), start(), and stop()
+  for (Vehicle v in vehicles) {
+    v.displayInfo();
+    v.start();
+    v.stop();
+    print(""); // Adding a blank line to match the expected output spacing
 
-  // TODO: Print the age of each vehicle using calculateAge()
+    // TODO: Print the age of each vehicle using calculateAge()
+    if (v is Car) {
+      print("Car age: ${v.calculateAge()} years");
+    } else if (v is Motorcycle) {
+      print("Motorcycle age: ${v.calculateAge()} years");
+    }
+  }
 }
